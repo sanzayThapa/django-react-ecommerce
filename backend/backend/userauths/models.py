@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-# from shortuuid.djangofields import ShortUUIDField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from shortuuid.django_fields import ShortUUIDField
 class User(AbstractUser):
@@ -34,7 +35,7 @@ class User(AbstractUser):
     
     
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.FileField(upload_to="image", default="default/default_user_image.jpg")  # Fixed typo
     about = models.CharField(max_length=100, blank=True, null=True)
     full_name = models.CharField(max_length=100, blank=True, null=True)  # Added missing field
@@ -64,10 +65,20 @@ class Profile(models.Model):
 
 
 # Optional: Add related_name to make reverse lookups easier
-class Profile(models.Model):
-    user = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE,
-        related_name='profiles'  # This allows user.profiles.all()
-    )
-    # ... rest of the model remains the same
+# class Profile(models.Model):
+#     user = models.OneToOneField(
+#         User, 
+#         on_delete=models.CASCADE,
+#         related_name='profiles'  # This allows user.profiles.all()
+#     )
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save,sender=User)        
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+# post_save.connect(create_user_profile, sender=User)
+# post_save.connect(save_user_profile, sender=User)
