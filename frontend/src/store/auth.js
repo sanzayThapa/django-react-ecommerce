@@ -13,7 +13,18 @@ const useAuthStore = create((set, get) => ({
 
     }),
 
-setUser: (user) => set({ allUserData: user }),
+// setUser: (user) => set({ allUserData: user }),
+
+    setUser: (user) => {
+        if (user && typeof user === 'object') {
+            set({ allUserData: user });
+        } else {
+            console.error('Invalid user data provided to setUser');
+        }
+    },    
+
+
+
 setLoading: (loading) => set({ loading }),
 setLoggedIn: () => get().allUserData !== null,
 
