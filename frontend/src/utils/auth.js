@@ -96,11 +96,27 @@ export const setAuthUser (accessToken, refreshToken) => {
 
 export const getRefreshToken = async() => {
     const refreshToken = Cookies.get('refresh_token')
-    const response = await axios.post()
+    const response = await axios.post('user/token/refresh/', {
+        refresh: refreshToken
 
+})
 
+return response.data
 }
 
+
+export const isAccessTokenExpired = (accessToken) => {
+    try {
+        const decodedtoken = jwt_decode(accessToken)
+        return decodedtoken.exp < Date.now() / 100
+
+    } catch (error) {
+        console.log(error);
+        return true
+        
+    }
+    
+)
 
 
 
