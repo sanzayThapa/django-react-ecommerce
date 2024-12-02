@@ -65,7 +65,7 @@ export const setUser = async () => {
     }
 
     if (isAccessTokenExpired(accessToken)){
-        const response = await getRefreshTokenResponse(accessToken)
+        const response = await getRefreshToken(accessToken)
         setAuthUser(response.access, response.refresh)
     
     }else (
