@@ -10,7 +10,7 @@ const useAxios = async () => {
 
     const axiosInstance = axios.create({
         baseURL:  Base_Url,
-        headers: { Authorization: 'Bearer  ${access_token}' }
+        headers: { Authorization: `Bearer  ${access_token}` }
 
     })
 
@@ -20,7 +20,7 @@ const useAxios = async () => {
         }
 
         const response = await getRefreshToken(refresh_token)
-        setAuthUser(response.acccess, response.acccess)
+        setAuthUser(response.acccess, response.refresh);
 
         req.headers.Authorization = 'Bearer ${response.data.access}'
         return req
