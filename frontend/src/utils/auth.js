@@ -4,9 +4,9 @@ import jwt_decode from 'jwt_decode'
 import Cookie from 'js-cookie'
 import Cookies from 'js-cookie'
 
-export const login = (email, password) => {
+export const login = async (email, password) => {
     try {
-        const {data, status} = axios.post("user/token", {
+        const {data, status} = await axios.post("user/token", {
             email,
             password,
         })
@@ -52,12 +52,12 @@ export const register = async (full_name, email, phone , password, password2) =>
 }
 
 export const logout =() => {
-    Cookie.remove('access_token'),
-    Cookie.remove('refresh_token'),
+    Cookie.remove('access_token');
+    Cookie.remove('refresh_token');
     useAuthStore.getState().setUser(null)
 }
 
-export const setUser =() => {
+export const setUser = async () => {
     const accessToken = Cookie.get('access_token')
     const refreshToken = Cookie.get('refresh_token')
 
@@ -75,7 +75,7 @@ export const setUser =() => {
 }
 
 
-export const setAuthUser (accessToken, refreshToken) => {
+export const setAuthUser = (accessToken, refreshToken) => {
     Cookies.set('access_token', accessToken, {
         expires: 1,
         secure: true
@@ -108,7 +108,7 @@ return response.data
 export const isAccessTokenExpired = (accessToken) => {
     try {
         const decodedtoken = jwt_decode(accessToken)
-        return decodedtoken.exp < Date.now() / 100
+        return decodedtoken.exp < Date.now() / 1000
 
     } catch (error) {
         console.log(error);
@@ -116,7 +116,7 @@ export const isAccessTokenExpired = (accessToken) => {
         
     }
     
-)
+}
 
 
 
