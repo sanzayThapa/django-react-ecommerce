@@ -11,7 +11,7 @@ const Logout = () => {
     return (
         <>
             <section>
-                <main className="" style={{ marginBottom: 400, marginTop: 150 }}>
+                <main className="" style={{ marginBottom: 400, marginTop: 155 }}>
                     <div className="container">
                         <section className="">
                             <div className="row d-flex justify-content-center">
