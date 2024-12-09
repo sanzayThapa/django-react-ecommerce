@@ -135,7 +135,7 @@ function Register() {
                                                         />
                                                     </div>
                                                     <p className='fw-bold text-danger'>
-                                                        {password2 !== password ? 'Passwords do not match' : ''}
+                                                        {password2 !== password ? 'Password do not match' : ''}
                                                     </p>
 
                                                     <button className='btn btn-primary w-100' type="submit" disabled={isLoading}>
