@@ -2,16 +2,16 @@ import './App.css'; // Importing the CSS file for styling.
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom'; // Importing necessary components from 'react-router-dom' for routing.
 import { useEffect, useState } from 'react';
-// import Home from './views/shop/home'; // Importing the 'Home' component.
+import Home from './views/shop/home'; // Importing the 'Home' component.
 import MainWrapper from './layouts/MainWrapper'; // Importing the 'MainWrapper' component.
 import Login from './views/auth/login'; // Importing the 'Login' component.
 import PrivateRoute from './layouts/PrivateRoute'; // Importing the 'PrivateRoute' component.
-// import Logout from './views/auth/logout'; // Importing the 'Logout' component.
-// import Private from './views/auth/private'; // Importing the 'Private' component.
+import Logout from './views/auth/logout'; // Importing the 'Logout' component.
+import Private from './views/auth/private'; // Importing the 'Private' component.
 import Register from './views/auth/register'; // Importing the 'Register' component.
 import StoreHeader from './views/base/StoreHeader';
 import StoreFooter from './views/base/StoreFooter';
-// import ProductDetail from './views/shop/ProductDetail';
+import ProductDetail from './views/shop/ProductDetail';
 import Cart from './views/shop/Cart';
 import Checkout from './views/shop/Checkout';
 import PaymentSuccess from './views/shop/PaymentSuccess';
